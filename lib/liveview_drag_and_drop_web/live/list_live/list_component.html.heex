@@ -1,0 +1,49 @@
+<div class="bg-gray-100 py-4 rounded-lg">
+  <div class="space-y-5 mx-auto max-w-7xl px-4">
+    <.header>
+      <span class="text-red-400"><%= @list_name %></span>
+      <.simple_form
+        :let={f}
+        for={@form}
+        phx-change="validate"
+        phx-submit="save"
+        phx-target={@myself}
+      >
+        <.input field={f} name="todo" value="" type="text" />
+
+        <:actions>
+          <.button class="align-middle ml-2">
+            <.icon name="hero-plus" />
+          </.button>
+        </:actions>
+      </.simple_form>
+    </.header>
+
+    <div id={"#{@id}-items"} phx-hook="Sortable" data-list_id={@id}>
+      <div
+        :for={item <- @list}
+        id={"#{@id}-#{item.id}"}
+        data-id={item.id}
+        class="
+                    drag-item:focus-within:ring-0 drag-item:focus-within:ring-offset-0
+                    drag-ghost:bg-zinc-300 drag-ghost:border-0 drag-ghost:ring-0
+                "
+      >
+        <div class="flex">
+          <button type="button" class="w-10">
+            <.icon
+              name="hero-check-circle"
+              class="w-7 h-7 #{item.status == :completed && 'bg-green-600' || 'bg-gray-300'}"
+            />
+          </button>
+          <div class="flex-auto block text-sm leading-6 text-red-900">
+            <%= item.name %>
+          </div>
+          <button type="button" class="w-10 -mt-1 flex-none">
+            <.icon name="hero-x-mark" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
