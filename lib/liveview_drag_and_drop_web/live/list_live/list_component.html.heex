@@ -19,7 +19,7 @@
       </.simple_form>
     </.header>
 
-    <div id={"#{@id}-items"} phx-hook="Sortable" data-list_id={@id}>
+    <div id={"#{@id}-items"} phx-hook="Sortable" data-list_id={@id} data-group={@group}>
       <div
         :for={item <- @list}
         id={"#{@id}-#{item.id}"}

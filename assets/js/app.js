@@ -29,7 +29,9 @@ let Hooks = {}
 
 Hooks.Sortable = {
     mounted() {
+        let group = this.el.dataset.group
         let sorter = new Sortable(this.el, {
+            group: group ? group : undefined,
             animation: 150,
             delay: 100, 
             dragClass: "drag-item",
